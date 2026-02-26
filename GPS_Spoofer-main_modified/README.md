@@ -215,7 +215,7 @@ This section covers the transmission of spoofed GPS signals using a separate tra
 transmitter/socket.h
 transmitter/usrpgps
 transmitter/motion.py
-transmitter/dynamic_dt.py
+transmitter/dynamic_dt_correction.py
 ```
 
 ---
@@ -293,13 +293,13 @@ To simulate movement or add delays:
    python3 motion.py
    ```
 
-2. **Add Delay**: Run `dynamic_dt.py` to introduce additional delays if needed.
+2. **Add Delay**: Run `dynamic_dt_correction.py` to introduce additional delays if needed.
 
    ```bash
-   python3 dynamic_dt.py
+   python3 dynamic_dt_correction.py
    ```
 
-> ⚠️ Ensure that `motion.py` and `dynamic_dt.py` are executed **after** starting the transmitter.
+> ⚠️ Ensure that `motion.py` and `dynamic_dt_correction.py` are executed **after** starting the transmitter.
 
 ---
 
@@ -309,3 +309,19 @@ To simulate movement or add delays:
 - Ensure network connectivity between the transmitter and receiver PCs for proper operation.
 
 ---
+
+
+## 🧰 Troubleshooting build dependencies
+
+If CMake fails while building components, verify these common dependencies:
+
+- `GPS_Monitor`: requires Boost development headers/libraries (e.g., `libboost-all-dev`).
+- `GPS_Transmitter`: requires UHD SDK/dev files (`UHDConfig.cmake`), plus GNU Radio where needed.
+
+If UHD is installed in a non-standard path, set:
+
+```bash
+cmake .. -DUHD_DIR=/path/to/uhd/cmake
+```
+
+or export `CMAKE_PREFIX_PATH` accordingly before running CMake.
